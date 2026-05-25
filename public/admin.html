@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="studio-body">
+
+<div id="loginPage" class="login-page">
+  <div class="login-box">
+    <h1>🔐 ACCESS KEY</h1>
+    <input id="accessKey" placeholder="Enter key">
+    <button onclick="checkKey()">ACCESS PANEL</button>
+    <p id="loginError"></p>
+  </div>
+</div>
+
+<div id="adminPanel" style="display:none;">
+
+  <div class="studio-header">
+    <h1>🔨 TikTok Live Auction <span>Studio</span></h1>
+
+    <div class="connection-box">
+      <button id="keysTabBtn" class="purple" onclick="openKeysPanel()" style="display:none;">
+        🔑 Keys
+      </button>
+
+      <div id="statusDot" class="dot red"></div>
+      <strong id="statusText">DISCONNECTED</strong>
+      <span>@</span>
+      <input id="usernameInput" placeholder="@username">
+      <button class="purple" onclick="connectLive()">Connexion</button>
+      <button class="red-btn" onclick="disconnectLive()">Déconnexion</button>
+    </div>
+  </div>
+
+  <div class="studio-main">
+
+    <div class="url-panel">
+      <button class="purple small" onclick="openWidget()">Ventana Transparente</button>
+      <h2>Panneau D'Enchère</h2>
+
+      <div class="url-row">
+        <input id="widgetUrl" value="http://localhost:3000/widget.html" readonly>
+        <button onclick="copyUrl()">📋 Copy</button>
+      </div>
+    </div>
+
+    <div class="admin-grid">
+
+      <div class="admin-panel winners-panel">
+        <h3>🏆 WINNERS</h3>
+        <div id="winnerList" class="list-zone">No winners yet.</div>
+        <div class="panel-footer">Total Winners: <span id="totalWinners">0</span></div>
+      </div>
+
+      <div class="admin-panel participants-panel">
+        <h3>👥 PARTICIPANTS</h3>
+        <div id="participantList" class="list-zone">No participants yet.</div>
+        <div class="panel-footer">
+          <span>Total Participants: <b id="adminParticipants">0</b></span>
+          <span>Total Diamonds: <b id="adminCoins">0</b></span>
+        </div>
+      </div>
+
+      <div class="admin-panel controls-panel">
+        <h3>🎮 CONTROLS</h3>
+
+        <div class="inputs-3">
+          <label>Initial time (s):<input id="initialTime" type="number" value="60"></label>
+          <label>Delay (s):<input id="delayTime" type="number" value="30"></label>
+          <label>Minimum entry:<input id="minimumEntry" type="number" value="0"></label>
+        </div>
+
+        <div class="buttons-grid">
+          <button class="green" onclick="setSettings()">✅ Save</button>
+          <button class="green" onclick="startTimer()">🚀 Start</button>
+          <button class="orange" onclick="pauseTimer()">⏸ Pause</button>
+          <button class="red-btn" onclick="finishTimer()">🏁 Finish</button>
+          <button class="gray" onclick="restartRound()">↻ Restart</button>
+        </div>
+
+        <hr>
+
+        <label>Modify time (s):</label>
+        <input id="modifyAmount" type="number" value="10">
+
+        <div class="modify-grid">
+          <button class="green" onclick="modifyTime(1)">+</button>
+          <button class="red-btn" onclick="modifyTime(-1)">-</button>
+        </div>
+
+        <hr>
+
+        <label>Ajouter des pièces :</label>
+        <input id="playerName" placeholder="Username TikTok" oninput="previewTikTokAvatar()">
+
+        <img id="previewAvatar" src="" onerror="this.src='https://i.pravatar.cc/80?img=12'" style="width:55px;height:55px;border-radius:50%;display:none;margin:10px auto;border:2px solid white;object-fit:cover;">
+
+        <input id="coinAmount" type="number" value="10">
+        <button class="green full" onclick="addCoins()">+ Ajouter pièces</button>
+
+        <div id="adminTimer" class="admin-timer">01:00</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="keysPanel" class="keys-panel" style="display:none;">
+  <h2>🔑 Gestion des Keys</h2>
+
+  <input id="keyDays" type="number" placeholder="Nombre de jours">
+
+  <button onclick="createKey()">Créer une key</button>
+
+  <div id="keysList"></div>
+
+  <button class="red-btn" onclick="closeKeysPanel()">Fermer</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>

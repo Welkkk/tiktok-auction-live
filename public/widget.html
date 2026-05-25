@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Widget</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="widget">
+
+  <div class="minimum-box">
+    <span>MINIMUM :</span>
+    <strong id="minimumValue">0 🪙</strong>
+  </div>
+
+  <div class="delay-box">
+    <span>🛡️ SNIPE DELAY</span>
+    <strong id="delayValue">30S</strong>
+  </div>
+
+  <div class="timer-card">
+    <div id="timerText" class="timer-text">1:00</div>
+
+    <div class="divider"></div>
+
+    <div id="emptyText" class="empty-text">
+      Aucune enchère en cours.<br>
+      Envoyez un cadeau pour participer !
+    </div>
+
+    <div id="leaderboard"></div>
+
+    <div class="participants-pill">
+      👥 Total participants: <span id="totalParticipants">0</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="widget.js"></script>
+
+</body>
+</html>
